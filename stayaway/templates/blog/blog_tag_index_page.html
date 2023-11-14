@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags</title>
+</head>
+
+<body>
+        <section class="banner" id="banner" style="background-color: black; height: 100vh;">
+                {% if request.GET.tag %}
+                    <h4>¿Donde deseas ir? <!--"{{ request.GET.tag }}"--></h4>
+                {% endif %}
+
+                {% for postpage in postpage %}
+                <div class="card col-lg-4 col-sm-6 mb-4 text-align-center" style="width: 18rem; display: inline-block; margin: 40px; text-align: center; background-color: rgb(0, 0, 0);">
+                    <div class="card-body">
+                      <h3>{{ postpage.title}}</h3>
+                      <hr>
+                      <strong><a class="btn btn-outline-warning" href="{% pageurl postpage %}">Ir ahora</a></strong><br />
+                    </div>
+                </div>
+
+                {% empty %}
+                No pages found with that tag.
+                {% endfor %}
+        </section>
+</body>
+</html>
+
+<style>
+    body{
+        text-align: center;
+    }
+    .banner {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)),
+            url(https://c.wallhere.com/photos/86/ca/camera_old_trip_light_house_building_art_abandoned-901282.jpg!d);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+    }
+
+    h4{
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 45px;
+        font-family: 'Opens Sans';
+    }
+    .card{
+        scale: 0.95;
+        box-shadow: 0 25px 25px grey;
+        font-family: 'Opens Sans';
+    }
+    .card-body h3{
+        color: white;
+    }
+</style>
+{% endblock %}
